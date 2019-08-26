@@ -40,13 +40,17 @@
 ### 部分截图
 
 在主页上可以看到根据笔记本自动生成的快捷入口
+
 <img src="./images/index.png" width="500px"  alt="主页"/>
 
 可以根据关键字对笔记进行搜索
+
 <img src="./images/search.png" width="500px"  alt="笔记搜索"/>
 
 根据打卡的时间，自动生成打卡时间的折线图
+
 <img src="./images/sleep.png" width="500px"  alt="睡前打卡时间曲线"/>
 
 用 Hbuilder 打包成手机 APP
+
 <img src="./images/mobile.png" width="500px"  alt="手机模式"/>
