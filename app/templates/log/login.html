@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}羽儿之家 - 登陆{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>登陆</h1>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+    <h4>新用户请<a href="{{ url_for('log.register') }}">点击此处注册</a>.</h4>
+</div>
+{% endblock %}

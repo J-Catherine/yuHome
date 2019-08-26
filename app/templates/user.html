@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}羽儿之家 - {{ user.username }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=128) }}">
+    <div class="profile-header">
+        <h1>{{ user.username }}</h1>
+        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+        <p>注册于： {{ moment(user.member_since).format('L') }}</p>
+        <p>上一次登录于： {{ moment(user.last_seen).format('L') }}.</p>
+        <p>
+	        {% if user == current_user %}
+	        	<a class="btn btn-default" href="{{ url_for('.edit_profile') }}">修改资料</a>
+	        {% endif %}
+            <a class="btn btn-default" href="{{ url_for('.private') }}">返回主页</a>
+        </p>
+    </div>
+</div>
+<h3>{{ user.username }}发布了说说</h3>
+    {% include '_posts.html' %}
+{% endblock %}

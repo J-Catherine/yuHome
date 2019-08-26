@@ -1,0 +1,852 @@
+<!doctype html>
+<html style='font-size:20px !important'>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>6-面向对象编程.md</title><link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'><style type='text/css'>html, body {overflow-x: initial !important;}.CodeMirror { height: auto; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror pre { }
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background-color: white; }
+.CodeMirror-gutters { border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); background-color: rgb(247, 247, 247); white-space: nowrap; }
+.CodeMirror-linenumbers { }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.CodeMirror div.CodeMirror-cursor { border-left-width: 1px; border-left-style: solid; border-left-color: black; z-index: 3; }
+.CodeMirror div.CodeMirror-secondarycursor { border-left-width: 1px; border-left-style: solid; border-left-color: silver; }
+.CodeMirror.cm-keymap-fat-cursor div.CodeMirror-cursor { width: auto; border: 0px; background-color: rgb(119, 238, 119); z-index: 1; background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror div.CodeMirror-cursor.CodeMirror-overwrite { }
+.cm-tab { display: inline-block; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property { color: rgb(217, 79, 138); }
+.cm-s-typora-default pre.cm-header1:not(.cm-atom) :not(.cm-overlay) { font-size: 2rem; line-height: 2rem; }
+.cm-s-typora-default pre.cm-header2:not(.cm-atom) :not(.cm-overlay) { font-size: 1.4rem; line-height: 1.4rem; }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(149, 132, 134); }
+.cm-s-typora-default .cm-table-row, .cm-s-typora-default .cm-block-start { font-family: monospace; }
+.cm-s-typora-default .cm-comment, .cm-s-typora-default .cm-code { color: rgb(74, 90, 159); font-family: monospace; }
+.cm-s-typora-default .cm-tag { color: rgb(169, 68, 66); }
+.cm-s-typora-default .cm-string { color: rgb(126, 134, 169); }
+.cm-s-typora-default .cm-link { color: rgb(196, 122, 15); text-decoration: underline; }
+.cm-s-typora-default .cm-variable-2, .cm-s-typora-default .cm-variable-1 { color: inherit; }
+.cm-s-typora-default .cm-overlay { font-size: 1rem; font-family: monospace; }
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor { border-left-width: 3px; border-left-style: solid; border-left-color: rgb(228, 98, 154); }
+.cm-s-typora-default .CodeMirror-activeline-background { left: -60px; right: -30px; background-color: rgba(204, 204, 204, 0.2); background-position: initial initial; background-repeat: initial initial; }
+.cm-s-typora-default .CodeMirror-gutters { border-right-style: none; background-color: inherit; }
+.cm-s-typora-default .cm-trailing-space-new-line::after, .cm-startspace::after, .cm-starttab .cm-tab::after { content: '•'; position: absolute; left: 0px; opacity: 0; font-family: LetterGothicStd, monospace; }
+.os-windows .cm-startspace::after, .os-windows .cm-starttab .cm-tab::after { left: -0.1em; }
+.cm-starttab .cm-tab::after { content: ' '; }
+.cm-startspace, .cm-tab, .cm-starttab, .cm-trailing-space-a, .cm-trailing-space-b, .cm-trailing-space-new-line { font-family: monospace; position: relative; }
+.cm-s-typora-default .cm-trailing-space-new-line::after { content: '↓'; opacity: 0.3; }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: black; }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-property { color: black; }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: blue; }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: bold; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: rgb(255, 0, 0); }
+.cm-invalidchar { color: rgb(255, 0, 0); }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; margin-right: -30px; padding-bottom: 30px; padding-right: 30px; height: 100%; outline: none; position: relative; box-sizing: content-box; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-width: 0px; background-color: transparent; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right-width: 30px; border-right-style: solid; border-right-color: transparent; width: -webkit-fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right-style: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-widget { }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right-style: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background-color: rgb(217, 217, 217); background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror-focused .CodeMirror-selected { background-color: rgb(215, 212, 240); background-position: initial initial; background-repeat: initial initial; }
+.cm-searching { background-color: rgba(255, 255, 0, 0.4); background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror span { }
+@media print { 
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid black; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; color: infotext; font-family: monospace; overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: 0% 100%; background-repeat: repeat no-repeat; }
+.CodeMirror-lint-mark-error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg==); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; background-position: 50% 50%; background-repeat: no-repeat no-repeat; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: 0% 0%; background-repeat: no-repeat no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII=); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII=); }
+.CodeMirror-lint-marker-multiple { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC); width: 100%; height: 100%; background-position: 100% 100%; background-repeat: no-repeat no-repeat; }
+
+
+html { font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { background-color: rgb(181, 214, 252); text-shadow: none; background-position: initial initial; background-repeat: initial initial; }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; padding-bottom: 70px; white-space: pre-wrap; overflow-x: auto; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) { 
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > p:first-child, #write > ul:first-child, #write > ol:first-child, #write > pre:first-child, #write > blockquote:first-child, #write > div:first-child, #write > table:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+input, button, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; line-height: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+::before, ::after, * { box-sizing: border-box; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre { width: inherit; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6 { position: relative; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0rem; -webkit-margin-after: 0rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: bold; font-style: italic; }
+a { cursor: pointer; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; margin: 4px 0px 0px; }
+tr { page-break-inside: avoid; page-break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; page-break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; page-break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background-color: transparent; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: normal; text-align: left; box-sizing: content-box; direction: ltr; background-position: initial initial; background-repeat: initial initial; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li p, li .mathjax-block { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; }
+@media print { 
+  html, body { height: 100%; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0mm; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; overflow-x: hidden; background-position: initial initial; background-repeat: initial initial; }
+p .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+.mathjax-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: none; box-shadow: none; }
+.task-list { list-style-type: none; }
+.task-list-item { position: relative; padding-left: 1em; }
+.task-list-item input { position: absolute; top: 0px; left: 0px; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc::after, .md-toc-content::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); text-decoration: none; }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: bold; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) { 
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: '.'; }
+.md-tag { opacity: 0.5; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: monospace; }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border: none !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: none !important; background-color: transparent !important; text-shadow: initial !important; background-position: initial initial !important; background-repeat: initial initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0em; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: normal; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { -webkit-transition: none; transition: none; }
+
+
+@include-when-export url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/**
+ * css forked from https://github.com/GitbookIO/gitbook 
+ * www.gitbook.com
+ * Apache License
+ * https://github.com/GitbookIO/gitbook/blob/master/LICENSE
+ **/
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Open Sans Regular'),url('file:///Users/oukeiwa/Library/Application%20Support/abnerworks.Typora/themes/github/400.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Open Sans Italic'),url('file:///Users/oukeiwa/Library/Application%20Support/abnerworks.Typora/themes/github/400i.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Open Sans Bold'),url('file:///Users/oukeiwa/Library/Application%20Support/abnerworks.Typora/themes/github/700.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: bold;
+    src: local('Open Sans Bold Italic'),url('file:///Users/oukeiwa/Library/Application%20Support/abnerworks.Typora/themes/github/700i.woff') format('woff')
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write{
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 20px 30px 40px 30px;
+	padding-top: 20px;
+    padding-bottom: 100px;
+}
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+body > *:first-child {
+    margin-top: 0 !important;
+}
+body > *:last-child {
+    margin-bottom: 0 !important;
+}
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    /*background: url("file:///Users/oukeiwa/Library/Application%20Support/images/modules/styleguide/para.png") no-repeat 10px center;*/
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    padding-bottom: .3em;
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+   padding-bottom: .3em;
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 4px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+    border-bottom: 1px solid #ddd;
+}
+
+body > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+body > h1:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0;
+}
+body > h3:first-child,
+body > h4:first-child,
+body > h5:first-child,
+body > h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+a:first-child h1,
+a:first-child h2,
+a:first-child h3,
+a:first-child h4,
+a:first-child h5,
+a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+}
+h1 p,
+h2 p,
+h3 p,
+h4 p,
+h5 p,
+h6 p {
+    margin-top: 0;
+}
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dddddd;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+}
+table tr th {
+    font-weight: bold;
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr td {
+    border: 1px solid #cccccc;
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-gutters {
+    border-right: 1px solid #ddd;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 0.2em 1em;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+.task-list{
+	padding-left: 0;
+}
+
+.task-list-item {
+	padding-left:32px;
+}
+
+.task-list-item input {
+  top: 3px;
+  left: 8px;
+}
+
+@media screen and (min-width: 914px) {
+    /*body {
+        width: 854px;
+        margin: 0 auto;
+    }*/
+}
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag{
+	color: inherit;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#md-notification:before {
+    top: 10px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-mac'><h2><a name='header-c5' class='md-header-anchor '></a>面向对象</h2><p>和静态语言不同，Python允许对实例变量绑定任何数据，也就是说，对于两个实例变量，虽然它们都是同一个类的不同实例，但拥有的变量名称都可能不同</p><p>如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线<code>__</code>，在Python中，实例的变量名如果以<code>__</code>开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问</p><p>有些时候，你会看到以一个下划线开头的实例变量名，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。</p><p>判断一个变量是否是某个类型可以用<code>isinstance()</code>判断</p><p>对扩展开放：允许新增<code>Animal</code>子类；</p><p>对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。</p><h3><a name='header-c19' class='md-header-anchor '></a>使用type()</h3><p>首先，我们来判断对象类型，使用<code>type()</code>函数：</p><p>基本类型都可以用<code>type()</code>判断：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; type(123)
+&lt;class &#39;int&#39;&gt;
+&gt;&gt;&gt; type(&#39;str&#39;)
+&lt;class &#39;str&#39;&gt;
+&gt;&gt;&gt; type(None)
+&lt;type(None) &#39;NoneType&#39;&gt;</pre><p>如果一个变量指向函数或者类，也可以用<code>type()</code>判断：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; type(abs)
+&lt;class &#39;builtin_function_or_method&#39;&gt;
+&gt;&gt;&gt; type(a)
+&lt;class &#39;__main__.Animal&#39;&gt;</pre><p>但是<code>type()</code>函数返回的是什么类型呢？它返回对应的Class类型。如果我们要在<code>if</code>语句中判断，就需要比较两个变量的type类型是否相同：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; type(123)==type(456)
+True
+&gt;&gt;&gt; type(123)==int
+True
+&gt;&gt;&gt; type(&#39;abc&#39;)==type(123)
+False</pre><h3><a name='header-c31' class='md-header-anchor '></a>使用isinstance()</h3><p>对于class的继承关系来说，使用<code>type()</code>就很不方便。我们要判断class的类型，可以使用<code>isinstance()</code>函数。</p><p>我们回顾上次的例子，如果继承关系是：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>object -&gt; Animal -&gt; Dog -&gt; Husky</pre><p>那么，<code>isinstance()</code>就可以告诉我们，一个对象是否是某种类型。先创建3种类型的对象：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; a = Animal()
+&gt;&gt;&gt; d = Dog()
+&gt;&gt;&gt; h = Husky()</pre><p>然后，判断：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance(h, Husky)
+True</pre><p>没有问题，因为<code>h</code>变量指向的就是Husky对象。</p><p>再判断：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance(h, Dog)
+True
+</pre><p><code>h</code>虽然自身是Husky类型，但由于Husky是从Dog继承下来的，所以，<code>h</code>也还是Dog类型。换句话说，<code>isinstance()</code>判断的是一个对象是否是该类型本身，或者位于该类型的父继承链上。</p><p>因此，我们可以确信，<code>h</code>还是Animal类型：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance(h, Animal)
+True
+</pre><p>同理，实际类型是Dog的<code>d</code>也是Animal类型：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance(d, Dog) and isinstance(d, Animal)
+True
+</pre><p>但是，<code>d</code>不是Husky类型：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance(d, Husky)
+False</pre><p>能用<code>type()</code>判断的基本类型也可以用<code>isinstance()</code>判断：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance(&#39;a&#39;, str)
+True
+&gt;&gt;&gt; isinstance(123, int)
+True
+&gt;&gt;&gt; isinstance(b&#39;a&#39;, bytes)
+True</pre><p>并且还可以判断一个变量是否是某些类型中的一种，比如下面的代码就可以判断是否是list或者tuple：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; isinstance([1, 2, 3], (list, tuple))
+True
+&gt;&gt;&gt; isinstance((1, 2, 3), (list, tuple))
+True
+</pre><h3><a name='header-c65' class='md-header-anchor '></a>使用dir()</h3><p>如果要获得一个对象的所有属性和方法，可以使用<code>dir()</code>函数，它返回一个包含字符串的list，比如，获得一个str对象的所有属性和方法：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; dir(&#39;ABC&#39;)
+[&#39;__add__&#39;, &#39;__class__&#39;, &#39;__contains__&#39;, &#39;__delattr__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;
+…………………&#39;translate&#39;, &#39;upper&#39;, &#39;zfill&#39;]</pre><p>类似<code>__xxx__</code>的属性和方法在Python中都是有特殊用途的，比如<code>__len__</code>方法返回长度。在Python中，如果你调用<code>len()</code>函数试图获取一个对象的长度，实际上，在<code>len()</code>函数内部，它自动去调用该对象的<code>__len__()</code>方法，所以，下面的代码是等价的：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; len(&#39;ABC&#39;)
+3
+&gt;&gt;&gt; &#39;ABC&#39;.__len__()
+3</pre><p>我们自己写的类，如果也想用<code>len(myObj)</code>的话，就自己写一个<code>__len__()</code>方法：</p><p>剩下的都是普通属性或方法，比如<code>lower()</code>返回小写的字符串：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; &#39;ABC&#39;.lower()
+&#39;abc&#39;
+</pre><p>仅仅把属性和方法列出来是不够的，配合<code>getattr()</code>、<code>setattr()</code>以及<code>hasattr()</code>，我们可以直接操作一个对象的状态：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; class MyObject(object):
+...     def __init__(self):
+...         self.x = 9
+...     def power(self):
+...         return self.x * self.x
+...
+&gt;&gt;&gt; obj = MyObject()</pre><p>紧接着，可以测试该对象的属性：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; hasattr(obj, &#39;x&#39;) # 有属性&#39;x&#39;吗？
+True
+&gt;&gt;&gt; obj.x
+9
+&gt;&gt;&gt; hasattr(obj, &#39;y&#39;) # 有属性&#39;y&#39;吗？
+False
+&gt;&gt;&gt; setattr(obj, &#39;y&#39;, 19) # 设置一个属性&#39;y&#39;
+&gt;&gt;&gt; hasattr(obj, &#39;y&#39;) # 有属性&#39;y&#39;吗？
+True
+&gt;&gt;&gt; getattr(obj, &#39;y&#39;) # 获取属性&#39;y&#39;
+19
+&gt;&gt;&gt; obj.y # 获取属性&#39;y&#39;
+19</pre><p>如果试图获取不存在的属性，会抛出AttributeError的错误：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; getattr(obj, &#39;z&#39;) # 获取属性&#39;z&#39;
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+AttributeError: &#39;MyObject&#39; object has no attribute &#39;z&#39;
+</pre><p>可以传入一个default参数，如果属性不存在，就返回默认值：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; getattr(obj, &#39;z&#39;, 404) # 获取属性&#39;z&#39;，如果不存在，返回默认值404
+404</pre><p>也可以获得对象的方法：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; hasattr(obj, &#39;power&#39;) # 有属性&#39;power&#39;吗？
+True
+&gt;&gt;&gt; getattr(obj, &#39;power&#39;) # 获取属性&#39;power&#39;
+&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;
+&gt;&gt;&gt; fn = getattr(obj, &#39;power&#39;) # 获取属性&#39;power&#39;并赋值到变量fn
+&gt;&gt;&gt; fn # fn指向obj.power
+&lt;bound method MyObject.power of &lt;__main__.MyObject object at 0x10077a6a0&gt;&gt;
+&gt;&gt;&gt; fn() # 调用fn()与调用obj.power()是一样的
+81</pre><h3><a name='header-c92' class='md-header-anchor '></a>检测</h3><p>一个正确的用法的例子如下：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>def readImage(fp):
+    if hasattr(fp, &#39;read&#39;):
+        return readData(fp)
+    return None
+</pre><p>假设我们希望从文件流fp中读取图像，我们首先要判断该fp对象是否存在read方法，如果存在，则该对象是一个流，如果不存在，则无法读取。<code>hasattr()</code>就派上了用场。</p><p>请注意，在Python这类动态语言中，根据鸭子类型，有<code>read()</code>方法，不代表该fp对象就是一个文件流，它也可能是网络流，也可能是内存中的一个字节流，但只要<code>read()</code>方法返回的是有效的图像数据，就不影响读取图像的功能。</p><h3><a name='header-c100' class='md-header-anchor '></a>实例属性和类属性</h3><p>由于Python是动态语言，根据类创建的实例可以任意绑定属性。</p><p>给实例绑定属性的方法是通过实例变量，或者通过<code>self</code>变量：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+s = Student(&#39;Bob&#39;)
+s.score = 90</pre><p>但是，如果<code>Student</code>类本身需要绑定一个属性呢？可以直接在class中定义属性，这种属性是类属性，归<code>Student</code>类所有：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+    name = &#39;Student&#39;</pre><p>当我们定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。来测试一下：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; class Student(object):
+...     name = &#39;Student&#39;
+...
+&gt;&gt;&gt; s = Student() # 创建实例s
+&gt;&gt;&gt; print(s.name) # 打印name属性，因为实例并没有name属性，所以会继续查找class的name属性
+Student
+&gt;&gt;&gt; print(Student.name) # 打印类的name属性
+Student
+&gt;&gt;&gt; s.name = &#39;Michael&#39; # 给实例绑定name属性
+&gt;&gt;&gt; print(s.name) # 由于实例属性优先级比类属性高，因此，它会屏蔽掉类的name属性
+Michael
+&gt;&gt;&gt; print(Student.name) # 但是类属性并未消失，用Student.name仍然可以访问
+Student
+&gt;&gt;&gt; del s.name # 如果删除实例的name属性
+&gt;&gt;&gt; print(s.name) # 再次调用s.name，由于实例的name属性没有找到，类的name属性就显示出来了
+Student</pre><p>从上面的例子可以看出，在编写程序的时候，千万不要把实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。</p><h3><a name='header-c114' class='md-header-anchor '></a><strong>slots</strong></h3><p>为了给所有实例都绑定方法，可以给class绑定方法：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; def set_score(self, score):
+...     self.score = score
+...
+&gt;&gt;&gt; Student.set_score = set_score</pre><p>为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的<code>__slots__</code>变量，来限制该class实例能添加的属性：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+    __slots__ = (&#39;name&#39;, &#39;age&#39;) # 用tuple定义允许绑定的属性名称</pre><p>使用<code>__slots__</code>要注意，<code>__slots__</code>定义的属性仅对当前类实例起作用，对继承的子类是不起作用的：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; class GraduateStudent(Student):
+...     pass
+...
+&gt;&gt;&gt; g = GraduateStudent()
+&gt;&gt;&gt; g.score = 9999</pre><p>除非在子类中也定义<code>__slots__</code>，这样，子类实例允许定义的属性就是自身的<code>__slots__</code>加上父类的<code>__slots__</code></p><h3><a name='header-c126' class='md-header-anchor '></a>@property</h3><p>在绑定属性时，如果我们直接把属性暴露出去，虽然写起来很简单，但是，没办法检查参数，导致可以把成绩随便改：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>s = Student()
+s.score = 9999</pre><p>这显然不合逻辑。为了限制score的范围，可以通过一个<code>set_score()</code>方法来设置成绩，再通过一个<code>get_score()</code>来获取成绩，这样，在<code>set_score()</code>方法里，就可以检查参数：</p><p>现在，对任意的Student实例进行操作，就不能随心所欲地设置score了：</p><p>但是，上面的调用方法又略显复杂，没有直接用属性这么直接简单。</p><p>有没有既能检查参数，又可以用类似属性这样简单的方式来访问类的变量呢？对于追求完美的Python程序员来说，这是必须要做到的！</p><p>还记得装饰器（decorator）可以给函数动态加上功能吗？对于类的方法，装饰器一样起作用。Python内置的<code>@property</code>装饰器就是负责把一个方法变成属性调用的：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, value):
+        if not isinstance(value, int):
+            raise ValueError(&#39;score must be an integer!&#39;)
+        if value &lt; 0 or value &gt; 100:
+            raise ValueError(&#39;score must between 0 ~ 100!&#39;)
+        self._score = value</pre><p><code>@property</code>的实现比较复杂，我们先考察如何使用。把一个getter方法变成属性，只需要加上<code>@property</code>就可以了，此时，<code>@property</code>本身又创建了另一个装饰器<code>@score.setter</code>，负责把一个setter方法变成属性赋值，于是，我们就拥有一个可控的属性操作：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; s = Student()
+&gt;&gt;&gt; s.score = 60 # OK，实际转化为s.set_score(60)
+&gt;&gt;&gt; s.score # OK，实际转化为s.get_score()
+60
+&gt;&gt;&gt; s.score = 9999
+Traceback (most recent call last):
+  ...
+ValueError: score must between 0 ~ 100!</pre><p>注意到这个神奇的<code>@property</code>，我们在对实例属性操作的时候，就知道该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的。</p><p>还可以定义只读属性，只定义getter方法，不定义setter方法就是一个只读属性：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+
+    @property
+    def birth(self):
+        return self._birth
+
+    @birth.setter
+    def birth(self, value):
+        self._birth = value
+
+    @property
+    def age(self):
+        return 2015 - self._birth</pre><p>上面的<code>birth</code>是可读写属性，而<code>age</code>就是一个<strong>只读</strong>属性，因为<code>age</code>可以根据<code>birth</code>和当前时间计算出来。</p><p><code>@property</code>广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查，这样，程序运行时就减少了出错的可能性。</p><h3><a name='header-c153' class='md-header-anchor '></a>多重继承与MixIn</h3><p>在设计类的继承关系时，通常，主线都是单一继承下来的，例如，<code>Ostrich</code>继承自<code>Bird</code>。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让<code>Ostrich</code>除了继承自<code>Bird</code>外，再同时继承<code>Runnable</code>。这种设计通常称之为MixIn。</p><p>为了更好地看出继承关系，我们把<code>Runnable</code>和<code>Flyable</code>改为<code>RunnableMixIn</code>和<code>FlyableMixIn</code>。类似的，你还可以定义出肉食动物<code>CarnivorousMixIn</code>和植食动物<code>HerbivoresMixIn</code>，让某个动物同时拥有好几个MixIn：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Dog(Mammal, RunnableMixIn, CarnivorousMixIn):
+    pass</pre><p>MixIn的目的就是给一个类增加多个功能，这样，在设计类的时候，我们优先考虑通过多重继承来组合多个MixIn的功能，而不是设计多层次的复杂的继承关系。</p><p>比如，编写一个多进程模式的TCP服务，定义如下：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class MyTCPServer(TCPServer, ForkingMixIn):
+    pass
+</pre><p>编写一个多线程模式的UDP服务，定义如下：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class MyUDPServer(UDPServer, ThreadingMixIn):
+    pass
+</pre><p>如果你打算搞一个更先进的协程模型，可以编写一个<code>CoroutineMixIn</code>：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class MyTCPServer(TCPServer, CoroutineMixIn):
+    pass
+</pre><p>这样一来，我们不需要复杂而庞大的继承链，只要选择组合不同的类的功能，就可以快速构造出所需的子类。</p><p>由于Python允许使用多重继承，因此，MixIn就是一种常见的设计。</p><p>只允许单一继承的语言（如Java）不能使用MixIn的设计。</p><h3><a name='header-c176' class='md-header-anchor '></a>定制类</h3><p>看到类似<code>__slots__</code>这种形如<code>__xxx__</code>的变量或者函数名就要注意，这些在Python中是有特殊用途的。</p><p><code>__slots__</code>我们已经知道怎么用了，<code>__len__()</code>方法我们也知道是为了能让class作用于<code>len()</code>函数。</p><p>除此之外，Python的class中还有许多这样有特殊用途的函数，可以帮助我们定制类。`</p><p>只需要定义好<code>__str__()</code>方法，返回一个好看的字符串就可以了：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; class Student(object):
+...     def __init__(self, name):
+...         self.name = name
+...     def __str__(self):
+...         return &#39;Student object (name: %s)&#39; % self.name
+...
+&gt;&gt;&gt; print(Student(&#39;Michael&#39;))
+Student object (name: Michael)</pre><p>这样打印出来的实例，不但好看，而且容易看出实例内部重要的数据。</p><p>但是细心的朋友会发现直接敲变量不用<code>print</code>，打印出来的实例还是不好看：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; s = Student(&#39;Michael&#39;)
+&gt;&gt;&gt; s
+&lt;__main__.Student object at 0x109afb310&gt;</pre><p>这是因为直接显示变量调用的不是<code>__str__()</code>，而是<code>__repr__()</code>，两者的区别是<code>__str__()</code>返回用户看到的字符串，而<code>__repr__()</code>返回程序开发者看到的字符串，也就是说，<code>__repr__()</code>是为调试服务的。</p><p>解决办法是再定义一个<code>__repr__()</code>。但是通常<code>__str__()</code>和<code>__repr__()</code>代码都是一样的，所以，有个偷懒的写</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+    def __init__(self, name):
+        self.name = name
+    def __str__(self):
+        return &#39;Student object (name=%s)&#39; % self.name
+    __repr__ = __str__</pre><h3><a name='header-c196' class='md-header-anchor '></a>for …… in ……</h3><p>如果一个类想被用于<code>for ... in</code>循环，类似list或tuple那样，就必须实现一个<code>__iter__()</code>方法，该方法返回一个迭代对象，然后，Python的for循环就会不断调用该迭代对象的<code>__next__()</code>方法拿到循环的下一个值，直到遇到<code>StopIteration</code>错误时退出循环。</p><p>我们以斐波那契数列为例，写一个Fib类，可以作用于for循环：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Fib(object):
+    def __init__(self):
+        self.a, self.b = 0, 1 # 初始化两个计数器a，b
+
+    def __iter__(self):
+        return self # 实例本身就是迭代对象，故返回自己
+
+    def __next__(self):
+        self.a, self.b = self.b, self.a + self.b # 计算下一个值
+        if self.a &gt; 100000: # 退出循环的条件
+            raise StopIteration()
+        return self.a # 返回下一个值</pre><h3><a name='header-c202' class='md-header-anchor '></a>变成list</h3><p>Fib实例虽然能作用于for循环，看起来和list有点像，但是，把它当成list来使用还是不行，比如，取第5个元素：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; Fib()[5]
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: &#39;Fib&#39; object does not support indexing
+</pre><p>要表现得像list那样按照下标取出元素，需要实现<code>__getitem__()</code>方法：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Fib(object):
+    def __getitem__(self, n):
+        a, b = 1, 1
+        for x in range(n):
+            a, b = b, a + b
+        return a</pre><p>现在，就可以按下标访问数列的任意一项了</p><h3><a name='header-c211' class='md-header-anchor '></a>动态返回属性</h3><p>那就是写一个<code>__getattr__()</code>方法，动态返回一个属性。修改如下：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+
+    def __init__(self):
+        self.name = &#39;Michael&#39;
+
+    def __getattr__(self, attr):
+        if attr==&#39;score&#39;:
+            return 99
+</pre><p>当调用不存在的属性时，比如<code>score</code>，Python解释器会试图调用<code>__getattr__(self, &#39;score&#39;)</code>来尝试获得属性，这样，我们就有机会返回<code>score</code>的值：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; s = Student()
+&gt;&gt;&gt; s.name
+&#39;Michael&#39;
+&gt;&gt;&gt; s.score
+99</pre><p>这种完全动态调用的特性有什么实际作用呢？作用就是，可以针对完全动态的情况作调用。</p><p>举个例子：</p><p>现在很多网站都搞REST API，比如新浪微博、豆瓣啥的，调用API的URL类似：</p><ul><li><a href='http://api.server/user/friends'>http://api.server/user/friends</a></li><li><a href='http://api.server/user/timeline/list'>http://api.server/user/timeline/list</a></li></ul><p>如果要写SDK，给每个URL对应的API都写一个方法，那得累死，而且，API一旦改动，SDK也要改。</p><p>利用完全动态的<code>__getattr__</code>，我们可以写出一个链式调用：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Chain(object):
+
+    def __init__(self, path=&#39;&#39;):
+        self._path = path
+
+    def __getattr__(self, path):
+        return Chain(&#39;%s/%s&#39; % (self._path, path))
+
+    def __str__(self):
+        return self._path
+
+    __repr__ = __str__
+</pre><p>试试：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; Chain().status.user.timeline.list
+&#39;/status/user/timeline/list&#39;
+</pre><p>这样，无论API怎么变，SDK都可以根据URL实现完全动态的调用，而且，不随API的增加而改变！</p><p>还有些REST API会把参数放到URL中，比如GitHub的API：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>GET /users/:user/repos
+</pre><p>调用时，需要把<code>:user</code>替换为实际用户名。如果我们能写出这样的链式调用：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>Chain().users(&#39;michael&#39;).repos
+</pre><p>就可以非常方便地调用API了。</p><h3><a name='header-c249' class='md-header-anchor '></a>直接对实例调用</h3><p>任何类，只需要定义一个<code>__call__()</code>方法，就可以直接对实例进行调用。请看示例：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self):
+        print(&#39;My name is %s.&#39; % self.name)
+</pre><p>调用方式如下：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; s = Student(&#39;Michael&#39;)
+&gt;&gt;&gt; s() # self参数不要传入
+My name is Michael.</pre><p><code>__call__()</code>还可以定义参数。对实例进行直接调用就好比对一个函数进行调用一样，所以你完全可以把对象看成函数，把函数看成对象，因为这两者之间本来就没啥根本的区别。</p><p>如果你把对象看成函数，那么函数本身其实也可以在运行期动态创建出来，因为类的实例都是运行期创建出来的，这么一来，我们就模糊了对象和函数的界限。</p><p>那么，怎么判断一个变量是对象还是函数呢？其实，更多的时候，我们需要判断一个对象是否能被调用，能被调用的对象就是一个<code>Callable</code>对象，比如函数和我们上面定义的带有<code>__call__()</code>的类实例：</p><pre class='md-fences mock-cm' style='display:block;position:relative'>&gt;&gt;&gt; callable(Student())
+True
+&gt;&gt;&gt; callable(max)
+True
+&gt;&gt;&gt; callable([1, 2, 3])
+False
+&gt;&gt;&gt; callable(None)
+False
+&gt;&gt;&gt; callable(&#39;str&#39;)
+False
+</pre><p>通过<code>callable()</code>函数，我们就可以判断一个对象是否是“可调用”对象。</p></div>
+</body>
+</html>

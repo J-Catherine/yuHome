@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}羽儿之家 - 笔记{% endblock %}
+
+{% block page_content %}
+    <li class="post">
+        <div class="post-thumbnail">
+            <a href="{{ url_for('main.user', username=note.author.username) }}">
+                <img class="img-rounded profile-thumbnail" src="{{ note.author.gravatar(size=40) }}">
+            </a>
+        </div>
+        <div class="post-content">
+            <h2 class="post-title">{{ note.title }}</h2>
+            <h5 class="post-date-author">{{ moment(note.timestamp).fromNow() }} by <a href="{{ url_for('main.user', username=note.author.username) }}">{{ note.author.username }}</a></h5>
+            <div class="post-body">
+                {% if note.body_html %}
+                    {{ note.body_html | safe }}
+                {% else %}
+                    {{ note.body }}
+                {% endif %}
+            </div>
+        </div>
+    </li>
+{% include 'notebook/_comments.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'main.post', fragment='#comments', id=note.id) }}
+</div>
+{% endif %}
+{% endblock %}

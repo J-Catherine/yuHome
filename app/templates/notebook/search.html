@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}羽儿之家-笔记搜索{% endblock %}
+
+{% block page_content %}
+    <div>{{ wtf.quick_form(search) }}</div>
+    <h3>关键词：{% for word in keywords %}{{ word }} {% endfor %}</h3>
+<div>
+<ul class="notes">
+    {% for note in notes %}
+        <h3 class="post-title"><a href="{{ url_for('notebook.note_html', bookname=note.notebook.name,notename=note.title) }}">{{ note.title  }}</a></h3>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+

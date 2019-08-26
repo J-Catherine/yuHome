@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}羽儿之家-{{ notebook.name }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>{{ notebook.name }}</h1>
+</div>
+<div class="post-content">
+    <h3>{{ notebook.descripton }}</h3>
+<br>
+</div>
+<div>
+<ul class="notes">
+    {% for note in notes %}
+        <h4 class="post-title">--><a href="{{ url_for('notebook.note_html', bookname=notebook.name,notename=note.title) }}">{{ note.title  }}</a></h4>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}羽儿之家{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1> {% if current_user.is_authenticated %}你好,{{ current_user.username }}！{% else %}欢迎注册留言~{% endif %}</h1>
+</div>
+    <div>{{ wtf.quick_form(search) }}</div>
+
+{% include '_posts.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.private') }}
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+
